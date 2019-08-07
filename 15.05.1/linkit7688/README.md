@@ -405,6 +405,90 @@ In the Ubuntu system, open the **Terminal** application and enter the following 
 	```
 
 
+7. libmraa
+	
+	```
+	HEAD is now at 70600de mraa: update to version 0.8.0
+	error: Server does not allow request for unadvertised object 9cc90b7976252b2d14b7956230c5870097e1f008
+	Fetched in submodule path 'doxygen2jsdoc', but it did not contain 9cc90b7976252b2d14b7956230c5870097e1f008. Direct fetching of that commit failed.
+	Makefile:51: recipe for target '/home/joseph/openwrt/linkit-7688/dl/libmraa-0.8.0-70600dece4138b0c0dbaff42f57828f1559cd840.tar.gz' failed
+	make[3]: *** [/home/joseph/openwrt/linkit-7688/dl/libmraa-0.8.0-70600dece4138b0c0dbaff42f57828f1559cd840.tar.gz] Error 1
+	make[3]: Leaving directory '/home/joseph/openwrt/linkit-7688/feeds/packages/libs/libmraa'
+	package/Makefile:191: recipe for target 'package/feeds/packages/libmraa/compile' failed
+	make[2]: *** [package/feeds/packages/libmraa/compile] Error 2
+	make[2]: Leaving directory '/home/joseph/openwrt/linkit-7688'
+	```
+	
+	**Solution:**
+	
+	```shell 
+	$ vim ./feeds/linkit/mtk-linkit/Makefile
+	[...]
+	define Package/mtk-linkit
+	  TITLE:=MTK LinkIt Smart board support package
+	  HIDDEN:=1
+	  DEPENDS:=@TARGET_ramips_mt7688_LinkIt7688 \
+	  	+gdbserver +curl +strace +coreutils +coreutils-stty \
+	  	+avahi-nodbus-daemon +mountd +mjpg-streamer \
+		+uhttpd +rpcd +rpcd-mod-iwinfo +git +git-http +samba36-server \
+		+python +python-pyserial +python-pip +hidapi \
+		# +libmraa +libupm \
+		+node +node-hid +node-cylon-firmata \
+		+yunbridge \
+	
+	:wq
+	$ 
+	$ ./script/feeds update
+	$ make menuconfig
+	#### Disable those options:
+	#### Global build settings -> Compile with support for patented functionality
+	#### Libraries > IoT > libupm
+	#### Libraries > libmraa
+	```
+	
+	
+	Reference: [MTK Openwrt make fails](https://en.forum.labs.mediatek.com/t/openwrt-make-fails/1786)
+
+
+
+8. node.js > serial issue
+
+	```
+	Makefile:61: recipe for target '/home/lte/Desktop/setup/openwrt/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/node-serialport-1.4.6/.built' failed
+	make[3]: *** [/home/lte/Desktop/setup/openwrt/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/node-serialport-1.4.6/.built] Segmentation fault (core dumped)
+	make[3]: Leaving directory '/home/lte/Desktop/setup/openwrt/feeds/packages/lang/node-serialport'
+	package/Makefile:191: recipe for target 'package/feeds/packages/node-serialport/compile' failed
+	make[2]: *** [package/feeds/packages/node-serialport/compile] Error 2
+	make[2]: Leaving directory '/home/lte/Desktop/setup/openwrt'
+	```
+	
+	**Solution:**
+	
+	```shell 
+	$ vim ./feeds/linkit/mtk-linkit/Makefile
+	[...]
+	define Package/mtk-linkit
+	  TITLE:=MTK LinkIt Smart board support package
+	  HIDDEN:=1
+	  DEPENDS:=@TARGET_ramips_mt7688_LinkIt7688 \
+	  	+gdbserver +curl +strace +coreutils +coreutils-stty \
+	  	+avahi-nodbus-daemon +mountd +mjpg-streamer \
+		+uhttpd +rpcd +rpcd-mod-iwinfo +git +git-http +samba36-server \
+		+python +python-pyserial +python-pip +hidapi \
+		# +libmraa +libupm \
+		# +node +node-hid +node-cylon-firmata \
+		+yunbridge \
+	
+	:wq
+	$ 
+	$ ./script/feeds update
+	$ make menuconfig
+	#### Disable those options:
+	#### Libraries > Language > Node.js > disable all!
+	```
+
+
+
 <br/>
 
 ------

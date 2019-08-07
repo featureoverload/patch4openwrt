@@ -1,0 +1,293 @@
+  CHK     include/generated/compile.h
+  UPD     include/generated/compile.h
+  CC      init/version.o
+  LD      init/built-in.o
+  KSYM    .tmp_kallsyms1.o
+  KSYM    .tmp_kallsyms2.o
+  LD      vmlinux
+  SORTEX  vmlinux
+  SYSMAP  System.map
+  Building modules, stage 2.
+  MODPOST 118 modules
+make[5]: Nothing to be done for 'modules'.
+make[5]: Leaving directory '/home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/linux-3.18.23'
+mipsel-openwrt-linux-uclibc-objcopy -O binary -R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id -S /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/linux-3.18.23/vmlinux /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux
+mipsel-openwrt-linux-uclibc-objcopy -R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id -S /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/linux-3.18.23/vmlinux /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux.elf
+cp -fpR /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/linux-3.18.23/vmlinux /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux.debug
+touch /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/linux-3.18.23/.image
+make -C image compile install TARGET_BUILD=
+make[5]: Entering directory '/home/joseph/openwrt/linkit-7688/target/linux/ramips/image'
+make[5]: Nothing to be done for 'compile'.
+mkdir -p /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/tmp
+# Use symbolic permissions to avoid clobbering SUID/SGID/sticky bits
+find /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/root-ramips -type f -not -perm /0100 -not -name 'ssh_host*' -not -name 'shadow' -print0 | xargs -r -0 chmod u+rw,g+r,o+r
+find /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/root-ramips -type f -perm /0100 -print0 | xargs -r -0 chmod u+rwx,g+rx,o+rx
+find /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/root-ramips -type d -print0 | xargs -r -0 chmod u+rwx,g+rx,o+rx
+install -d -m0755 /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/root-ramips/tmp /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/root-ramips/overlay
+chmod 1777 /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/root-ramips/tmp
+cp /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux.elf /home/joseph/openwrt/linkit-7688/bin/ramips/openwrt-ramips-mt7688-vmlinux.elf
+cp /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux /home/joseph/openwrt/linkit-7688/bin/ramips/openwrt-ramips-mt7688-vmlinux.bin
+/home/joseph/openwrt/linkit-7688/staging_dir/host/bin/lzma e /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux -lc1 -lp2 -pb2 /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux.bin.lzma
+
+LZMA 4.65 : Igor Pavlov : Public domain : 2009-02-03
+mkimage -A mips -O linux -T kernel -C lzma -a 0x80000000 -e 0x80000000 -n "MIPS OpenWrt Linux-3.18.23" -d /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux.bin.lzma /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/uImage.lzma
+Image Name:   MIPS OpenWrt Linux-3.18.23
+Created:      Wed Aug  7 11:14:29 2019
+Image Type:   MIPS Linux Kernel Image (lzma compressed)
+Data Size:    1151181 Bytes = 1124.20 kB = 1.10 MB
+Load Address: 80000000
+Entry Point:  80000000
+cp /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/uImage.lzma /home/joseph/openwrt/linkit-7688/bin/ramips/openwrt-ramips-mt7688-uImage.bin
+/home/joseph/openwrt/linkit-7688/staging_dir/host/bin/mksquashfs4 /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/root-ramips /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/root.squashfs -nopad -noappend -root-owned -comp xz -Xpreset 9 -Xe -Xlc 0 -Xlp 2 -Xpb 2  -b 256k -p '/dev d 755 0 0' -p '/dev/console c 600 0 0 5 1' -processors 1
+Parallel mksquashfs: Using 1 processor
+Creating 4.0 filesystem on /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/root.squashfs, block size 262144.
+Pseudo file "/dev" exists in source filesystem "/home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/root-ramips/dev".
+Ignoring, exclude it (-e/-ef) to override.
+[=============================================================================================|] 2519/2519 100%
+Exportable Squashfs 4.0 filesystem, xz compressed, data block size 262144
+	compressed data, compressed metadata, compressed fragments, no xattrs
+	duplicates are removed
+Filesystem size 12404.16 Kbytes (12.11 Mbytes)
+	28.06% of uncompressed filesystem size (44202.90 Kbytes)
+Inode table size 26944 bytes (26.31 Kbytes)
+	24.61% of uncompressed inode table size (109497 bytes)
+Directory table size 33542 bytes (32.76 Kbytes)
+	47.69% of uncompressed directory table size (70334 bytes)
+Number of duplicate files found 38
+Number of inodes 3229
+Number of files 2473
+Number of fragments 108
+Number of symbolic links  558
+Number of device nodes 1
+Number of fifo nodes 0
+Number of socket nodes 0
+Number of directories 197
+Number of ids (unique uids + gids) 1
+Number of uids 1
+	root (0)
+Number of gids 1
+	root (0)
+dd if=/home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/root.squashfs of=/home/joseph/openwrt/linkit-7688/bin/ramips/openwrt-ramips-mt7688-root.squashfs bs=128k conv=sync
+96+1 records in
+97+0 records out
+12713984 bytes (13 MB, 12 MiB) copied, 0.00508305 s, 2.5 GB/s
+cp /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux-LinkIt7688
+/home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/linux-3.18.23/scripts/dtc/dtc -O dtb -o /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/LINKIT7688.dtb ../dts/LINKIT7688.dts
+/home/joseph/openwrt/linkit-7688/staging_dir/host/bin/patch-dtb /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux-LinkIt7688 /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/LINKIT7688.dtb
+/home/joseph/openwrt/linkit-7688/staging_dir/host/bin/lzma e /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux-LinkIt7688 -lc1 -lp2 -pb2 /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux-LinkIt7688.bin.lzma
+
+LZMA 4.65 : Igor Pavlov : Public domain : 2009-02-03
+mkimage -A mips -O linux -T kernel -C lzma -a 0x80000000 -e 0x80000000 -n "MIPS OpenWrt Linux-3.18.23" -d /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux-LinkIt7688.bin.lzma /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux-LinkIt7688.uImage
+Image Name:   MIPS OpenWrt Linux-3.18.23
+Created:      Wed Aug  7 11:14:36 2019
+Image Type:   MIPS Linux Kernel Image (lzma compressed)
+Data Size:    1152892 Bytes = 1125.87 kB = 1.10 MB
+Load Address: 80000000
+Entry Point:  80000000
+cat /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/vmlinux-LinkIt7688.uImage /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/root.squashfs > /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/openwrt-ramips-mt7688-LinkIt7688-squashfs-sysupgrade.bin
+/home/joseph/openwrt/linkit-7688/staging_dir/host/bin/padjffs2 /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/openwrt-ramips-mt7688-LinkIt7688-squashfs-sysupgrade.bin 4 8 16 64 128 256
+padding image to 00d37000
+padding image to 00d38000
+padding image to 00d40000
+if [ `stat -c%s "/home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/openwrt-ramips-mt7688-LinkIt7688-squashfs-sysupgrade.bin"` -gt 33226752 ]; then echo "Warning: /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/openwrt-ramips-mt7688-LinkIt7688-squashfs-sysupgrade.bin is too big" >&2; else cp -fpR /home/joseph/openwrt/linkit-7688/build_dir/target-mipsel_24kec+dsp_uClibc-0.9.33.2/linux-ramips_mt7688/openwrt-ramips-mt7688-LinkIt7688-squashfs-sysupgrade.bin /home/joseph/openwrt/linkit-7688/bin/ramips/openwrt-ramips-mt7688-LinkIt7688-squashfs-sysupgrade.bin; fi
+( cd /home/joseph/openwrt/linkit-7688/bin/ramips ; find -maxdepth 1 -type f \! -name 'md5sums'  -printf "%P\n" | sort | xargs md5sum --binary > md5sums )
+( cd /home/joseph/openwrt/linkit-7688/bin/ramips ; find -maxdepth 1 -type f \! -name 'md5sums'  -printf "%P\n" | sort | xargs openssl dgst -sha256 > sha256sums )
+make[5]: Leaving directory '/home/joseph/openwrt/linkit-7688/target/linux/ramips/image'
+make[4]: Leaving directory '/home/joseph/openwrt/linkit-7688/target/linux/ramips'
+make[3]: Leaving directory '/home/joseph/openwrt/linkit-7688/target/linux'
+make[2]: Leaving directory '/home/joseph/openwrt/linkit-7688'
+export MAKEFLAGS= ;make -w -r package/index
+make[2]: Entering directory '/home/joseph/openwrt/linkit-7688'
+Generating package index...
+Generating index for package ./base-files_157.2-r48532_ramips_24kec.ipk
+Generating index for package ./busybox_1.23.2-1_ramips_24kec.ipk
+Generating index for package ./ca-certificates_20150426_ramips_24kec.ipk
+Generating index for package ./curl_7.40.0-3_ramips_24kec.ipk
+Generating index for package ./dnsmasq_2.73-1_ramips_24kec.ipk
+Generating index for package ./dropbear_2015.67-1_ramips_24kec.ipk
+Generating index for package ./firewall_2015-07-27_ramips_24kec.ipk
+Generating index for package ./fstools_2016-01-10-96415afecef35766332067f4205ef3b2c7561d21_ramips_24kec.ipk
+Generating index for package ./gdbserver_7.8-2_ramips_24kec.ipk
+Generating index for package ./hostapd-common_2015-03-25-1_ramips_24kec.ipk
+Generating index for package ./ip6tables_1.4.21-1_ramips_24kec.ipk
+Generating index for package ./iptables_1.4.21-1_ramips_24kec.ipk
+Generating index for package ./iwinfo_2015-06-01-ade8b1b299cbd5748db1acf80dd3e9f567938371_ramips_24kec.ipk
+Generating index for package ./jshn_2015-11-08-10429bccd0dc5d204635e110a7a8fae7b80d16cb_ramips_24kec.ipk
+Generating index for package ./jsonfilter_2014-06-19-cdc760c58077f44fc40adbbe41e1556a67c1b9a9_ramips_24kec.ipk
+Generating index for package ./kmod-ac97_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-dma-buf_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-fs-autofs4_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-fs-vfat_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-gpio-button-hotplug_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-i2c-core_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-i2c-ralink_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-input-core_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-ip6tables_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-ipt-conntrack_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-ipt-core_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-ipt-nat_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-ipv6_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-leds-gpio_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-ledtrig-netdev_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-lib-crc-ccitt_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-lib-lzo_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-mmc_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-nf-conntrack6_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-nf-conntrack_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-nf-ipt6_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-nf-ipt_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-nf-nat_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-nf-nathelper_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-nls-base_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-nls-cp437_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-nls-iso8859-15_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-nls-iso8859-1_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-nls-iso8859-2_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-nls-utf8_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-ppp_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-pppoe_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-pppox_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-regmap_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-scsi-core_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-sdhci-mt7620_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-sdhci_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-slhc_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-sound-core_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-sound-mtk_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-sound-soc-core_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-usb-core_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-usb-ohci_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-usb-storage_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-usb2_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-video-core_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-video-uvc_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./kmod-video-videobuf2_3.18.23-1_ramips_24kec.ipk
+Generating index for package ./libblobmsg-json_2015-11-08-10429bccd0dc5d204635e110a7a8fae7b80d16cb_ramips_24kec.ipk
+Generating index for package ./libbz2_1.0.6-2_ramips_24kec.ipk
+Generating index for package ./libcurl_7.40.0-3_ramips_24kec.ipk
+Generating index for package ./libelf1_0.161-1_ramips_24kec.ipk
+Generating index for package ./libgcc_4.8-linaro-1_ramips_24kec.ipk
+Generating index for package ./libiconv_7_ramips_24kec.ipk
+Generating index for package ./libip4tc_1.4.21-1_ramips_24kec.ipk
+Generating index for package ./libip6tc_1.4.21-1_ramips_24kec.ipk
+Generating index for package ./libiwinfo-lua_2015-06-01-ade8b1b299cbd5748db1acf80dd3e9f567938371_ramips_24kec.ipk
+Generating index for package ./libiwinfo_2015-06-01-ade8b1b299cbd5748db1acf80dd3e9f567938371_ramips_24kec.ipk
+Generating index for package ./libjson-c_0.12-1_ramips_24kec.ipk
+Generating index for package ./libjson-script_2015-11-08-10429bccd0dc5d204635e110a7a8fae7b80d16cb_ramips_24kec.ipk
+Generating index for package ./liblua_5.1.5-1_ramips_24kec.ipk
+Generating index for package ./libncurses_5.9-2_ramips_24kec.ipk
+Generating index for package ./libnl-tiny_0.1-4_ramips_24kec.ipk
+Generating index for package ./libopenssl_1.0.2f-1_ramips_24kec.ipk
+Generating index for package ./libpcap_1.5.3-1_ramips_24kec.ipk
+Generating index for package ./libpolarssl_1.3.14-1_ramips_24kec.ipk
+Generating index for package ./libpthread_0.9.33.2-1_ramips_24kec.ipk
+Generating index for package ./libreadline_6.3-1_ramips_24kec.ipk
+Generating index for package ./librt_0.9.33.2-1_ramips_24kec.ipk
+Generating index for package ./libstdcpp_4.8-linaro-1_ramips_24kec.ipk
+Generating index for package ./libthread-db_0.9.33.2-1_ramips_24kec.ipk
+Generating index for package ./libubox_2015-11-08-10429bccd0dc5d204635e110a7a8fae7b80d16cb_ramips_24kec.ipk
+Generating index for package ./libubus-lua_2015-05-25-f361bfa5fcb2daadf3b160583ce665024f8d108e_ramips_24kec.ipk
+Generating index for package ./libubus_2015-05-25-f361bfa5fcb2daadf3b160583ce665024f8d108e_ramips_24kec.ipk
+Generating index for package ./libuci-lua_2015-08-27.1-1_ramips_24kec.ipk
+Generating index for package ./libuci_2015-08-27.1-1_ramips_24kec.ipk
+Generating index for package ./libusb-1.0_1.0.19-1_ramips_24kec.ipk
+Generating index for package ./libusb-compat_0.1.4-1_ramips_24kec.ipk
+Generating index for package ./libxtables_1.4.21-1_ramips_24kec.ipk
+Generating index for package ./lua_5.1.5-1_ramips_24kec.ipk
+Generating index for package ./mountd_2015-11-22-8476a03b25d457e99f59e6372b8d9faebe2266f8_ramips_24kec.ipk
+Generating index for package ./mtd_21_ramips_24kec.ipk
+Generating index for package ./netifd_2015-12-16-245527193e90906451be35c2b8e972b8712ea6ab_ramips_24kec.ipk
+Generating index for package ./odhcp6c_2015-07-13-024525798c5f6aba3af9b2ef7b3af2f3c14f1db8_ramips_24kec.ipk
+Generating index for package ./odhcpd_2015-11-19-01d3f9d64486ac1daa144848944e877e7f0cb762_ramips_24kec.ipk
+Generating index for package ./opkg_9c97d5ecd795709c8584e972bfdf3aee3a5b846d-9_ramips_24kec.ipk
+Generating index for package ./ppp-mod-pppoe_2.4.7-6_ramips_24kec.ipk
+Generating index for package ./ppp_2.4.7-6_ramips_24kec.ipk
+Generating index for package ./procd_2015-10-29.1-d5fddd91b966424bb63e943e789704d52382cc18_ramips_24kec.ipk
+Generating index for package ./rpcd-mod-iwinfo_2015-01-10-f00890cd6eb47ad9bb5da0fb6c50aedc8406e7c5_ramips_24kec.ipk
+Generating index for package ./rpcd-mod-rpcsys_2015-01-10-f00890cd6eb47ad9bb5da0fb6c50aedc8406e7c5_ramips_24kec.ipk
+Generating index for package ./rpcd_2015-01-10-f00890cd6eb47ad9bb5da0fb6c50aedc8406e7c5_ramips_24kec.ipk
+Generating index for package ./samba36-server_3.6.25-5_ramips_24kec.ipk
+Generating index for package ./strace_4.8-1_ramips_24kec.ipk
+Generating index for package ./swconfig_10_ramips_24kec.ipk
+Generating index for package ./tcpdump-mini_4.5.1-4_ramips_24kec.ipk
+Generating index for package ./terminfo_5.9-2_ramips_24kec.ipk
+Generating index for package ./uboot-envtools_2014.10-2_ramips_24kec.ipk
+Generating index for package ./ubox_2015-11-22-c086167a0154745c677f8730a336ea9cf7d71031_ramips_24kec.ipk
+Generating index for package ./ubus_2015-05-25-f361bfa5fcb2daadf3b160583ce665024f8d108e_ramips_24kec.ipk
+Generating index for package ./ubusd_2015-05-25-f361bfa5fcb2daadf3b160583ce665024f8d108e_ramips_24kec.ipk
+Generating index for package ./uci_2015-08-27.1-1_ramips_24kec.ipk
+Generating index for package ./uhttpd-mod-ubus_2015-11-08-fe01ef3f52adae9da38ef47926cd50974af5d6b7_ramips_24kec.ipk
+Generating index for package ./uhttpd_2015-11-08-fe01ef3f52adae9da38ef47926cd50974af5d6b7_ramips_24kec.ipk
+Generating index for package ./usign_2015-05-08-cf8dcdb8a4e874c77f3e9a8e9b643e8c17b19131_ramips_24kec.ipk
+Generating index for package ./wireless-tools_29-5_ramips_24kec.ipk
+Generating index for package ./wpad-mini_2015-03-25-1_ramips_24kec.ipk
+Generating index for package ./zlib_1.2.8-1_ramips_24kec.ipk
+Generating index for package ./alsa-lib_1.0.28-1_ramips_24kec.ipk
+Generating index for package ./alsa-utils_1.0.28-2_ramips_24kec.ipk
+Generating index for package ./avahi-nodbus-daemon_0.6.31-12_ramips_24kec.ipk
+Generating index for package ./avrdude_6.1-1_ramips_24kec.ipk
+Generating index for package ./cgi-io_1_ramips_24kec.ipk
+Generating index for package ./coreutils-stty_8.23-1_ramips_24kec.ipk
+Generating index for package ./coreutils_8.23-1_ramips_24kec.ipk
+Generating index for package ./git-http_2.3.5-1_ramips_24kec.ipk
+Generating index for package ./git_2.3.5-1_ramips_24kec.ipk
+Generating index for package ./hidapi_0.8.0-rc1-1_ramips_24kec.ipk
+Generating index for package ./kmod-fs-exfat_3.18.23+git-20150301-1_ramips_24kec.ipk
+Generating index for package ./libavahi-nodbus-support_0.6.31-12_ramips_24kec.ipk
+Generating index for package ./libdaemon_0.14-5_ramips_24kec.ipk
+Generating index for package ./libdb47_4.7.25.4.NC-4.1_ramips_24kec.ipk
+Generating index for package ./libexpat_2.1.0-3_ramips_24kec.ipk
+Generating index for package ./libffi_3.0.13-1_ramips_24kec.ipk
+Generating index for package ./libftdi1_1.2-3_ramips_24kec.ipk
+Generating index for package ./libgdbm_1.11-1_ramips_24kec.ipk
+Generating index for package ./libid3tag_0.15.1b-4_ramips_24kec.ipk
+Generating index for package ./libjpeg_9a-1_ramips_24kec.ipk
+Generating index for package ./libsqlite3_3081101-1_ramips_24kec.ipk
+Generating index for package ./libuv_1.9.1-1_ramips_24kec.ipk
+Generating index for package ./libxml2_2.9.2-3_ramips_24kec.ipk
+Generating index for package ./mjpg-streamer_r182-7_ramips_24kec.ipk
+Generating index for package ./node_v0.12.7-1_ramips_24kec.ipk
+Generating index for package ./python-base_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-codecs_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-compiler_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-ctypes_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-db_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-decimal_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-distutils_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-email_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-gdbm_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-light_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-logging_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-multiprocessing_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-ncurses_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-openssl_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-pip_1.5.6-1_ramips_24kec.ipk
+Generating index for package ./python-pydoc_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-pyserial_2.7-1_ramips_24kec.ipk
+Generating index for package ./python-setuptools_7.0-1_ramips_24kec.ipk
+Generating index for package ./python-sqlite3_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-unittest_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python-xml_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./python_2.7.12-1_ramips_24kec.ipk
+Generating index for package ./spi-tools_1-cc6a41fdcec60610703ba6db488c621c64952898_ramips_24kec.ipk
+Generating index for package ./yunbridge_160-f2042052115e71ad2c91f77e78d21db8275fcdd6_ramips_24kec.ipk
+Generating index for package ./luci-app-firewall_git-18.097.75958-5537d68-1_all.ipk
+Generating index for package ./luci-app-mjpg-streamer_git-18.097.75958-5537d68-1_all.ipk
+Generating index for package ./luci-app-samba_git-18.097.75958-5537d68-1_all.ipk
+Generating index for package ./luci-base_git-18.097.75958-5537d68-1_ramips_24kec.ipk
+Generating index for package ./luci-lib-ip_git-18.097.75958-5537d68-1_ramips_24kec.ipk
+Generating index for package ./luci-lib-json_git-18.097.75958-5537d68-1_all.ipk
+Generating index for package ./luci-lib-nixio_git-18.097.75958-5537d68-1_ramips_24kec.ipk
+Generating index for package ./luci-mod-admin-full_git-18.097.75958-5537d68-1_ramips_24kec.ipk
+Generating index for package ./luci-proto-ipv6_git-18.097.75958-5537d68-1_all.ipk
+Generating index for package ./luci-proto-ppp_git-18.097.75958-5537d68-1_all.ipk
+Generating index for package ./luci-theme-bootstrap_git-18.097.75958-5537d68-1_all.ipk
+Generating index for package ./luci-theme-openwrt_git-18.097.75958-5537d68-1_all.ipk
+Generating index for package ./luci_git-18.097.75958-5537d68-1_all.ipk
+Generating index for package ./mtk-linkit-webui_2015-07-07-3676d579f7fc56dd9b07f2f75233acfbced7f032_ramips_24kec.ipk
+Generating index for package ./mtk-linkit_1_ramips_24kec.ipk
+Generating index for package ./mtk-sdk-wifi_2015-06-01-ade8b1b299cbd5748db1acf80dd3e9f567938371_ramips_24kec.ipk
+Signing package index...
+make[2]: Leaving directory '/home/joseph/openwrt/linkit-7688'
+make[1]: Leaving directory '/home/joseph/openwrt/linkit-7688'
+
