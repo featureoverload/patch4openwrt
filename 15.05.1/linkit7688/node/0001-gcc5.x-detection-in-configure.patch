@@ -1,0 +1,17 @@
+ndex: node-v0.12.7/configure
+===================================================================
+--- node-v0.12.7.orig/configure
++++ node-v0.12.7/configure
+@@ -479,6 +479,14 @@ def compiler_version():
+                           stdout=subprocess.PIPE)
+   version = tuple(map(int, proc.communicate()[0].split('.')))
+
++  # gcc-5 returns "(5,)", but later cc_version requires at least 2 parameters
++  # existing in version tuple.
++  if len(version) < 2 :
++    proc = subprocess.Popen(shlex.split(CC) + ['--version'],
++                          stdout=subprocess.PIPE)
++    minor_version = int(proc.communicate()[0].split('.')[1])
++    version = (version[0],minor_version)
++
+   return (version, is_clang)
