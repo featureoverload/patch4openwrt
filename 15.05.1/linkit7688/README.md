@@ -163,72 +163,77 @@ In the Ubuntu system, open the **Terminal** application and enter the following 
 	
 	**Solution:**
 	
-	 ```shell
-	 $ make tools/pkg-config/patches/
-	 $ vim tools/pkg-config/patches/001-glib-gdate-suppress-string-format-literal-warning.patch
-	 --- a/glib/glib/gdate.c
-	 +++ b/glib/glib/gdate.c
-	 @@ -2439,6 +2439,9 @@ win32_strftime_helper (const GDate     *d,
-	   *
-	   * Returns: number of characters written to the buffer, or 0 the buffer was too small
-	   */
-	 +#pragma GCC diagnostic push
-	 +#pragma GCC diagnostic ignored "-Wformat-nonliteral"
-	 +
-	  gsize     
-	  g_date_strftime (gchar       *s, 
-	                   gsize        slen, 
-	 @@ -2549,3 +2552,5 @@ g_date_strftime (gchar       *s,
-	    return retval;
-	  #endif
-	  }
-	 +
-	 +#pragma GCC diagnostic pop
-	 :wq
-	 $ make V=99
- ```
-  
-      > Reference:
-      >
-      > 1. https://github.com/hak5/wifipineapple-openwrt/blob/master/tools/pkg-config/patches/001-glib-gdate-suppress-string-format-literal-warning.patch
-      > 2. https://blog.csdn.net/fan1234500/article/details/79892981
-    > 3. https://blog.csdn.net/zmlovelx/article/details/81664043
-	
+	```shell
+	$ make tools/pkg-config/patches/
+	$ vim tools/pkg-config/patches/001-glib-gdate-suppress-string-format-literal-warning.patch
+	--- a/glib/glib/gdate.c
+	+++ b/glib/glib/gdate.c
+	@@ -2439,6 +2439,9 @@ win32_strftime_helper (const GDate     *d,
+	  *
+	  * Returns: number of characters written to the buffer, or 0 the buffer was too small
+	  */
+	+#pragma GCC diagnostic push
+	+#pragma GCC diagnostic ignored "-Wformat-nonliteral"
+	+
+	 gsize     
+	 g_date_strftime (gchar       *s, 
+	                  gsize        slen, 
+	@@ -2549,3 +2552,5 @@ g_date_strftime (gchar       *s,
+	   return retval;
+	 #endif
+	 }
+	+
+	+#pragma GCC diagnostic pop
+	:wq
+	$ make V=99
+	```
+
+	> Reference:
+	>
+	> 1. https://github.com/hak5/wifipineapple-openwrt/blob/master/tools/pkg-config/patches/001-glib-gdate-suppress-string-format-literal-warning.patch
+	> 2. https://blog.csdn.net/fan1234500/article/details/79892981
+	> 3. https://blog.csdn.net/zmlovelx/article/details/81664043
+
+
+
 2. [automake-1.5](automake)
 
 	**Solution:**
 	
-      ```shell
-      $ vim tools/automake/patches/010-automake-port-to-Perl-5.22-and-later.patch
-      --- a/bin/automake.in
-      +++ b/bin/automake.in
-      @@ -3878,7 +3878,7 @@ sub substitute_ac_subst_variables_worker
-       sub substitute_ac_subst_variables
-       {
-         my ($text) = @_;
-      -  $text =~ s/\${([^ \t=:+{}]+)}/substitute_ac_subst_variables_worker ($1)/ge;
-      +  $text =~ s/\$[{]([^ \t=:+{}]+)}/substitute_ac_subst_variables_worker ($1)/ge;
-         return $text;
-       }
-      
-      :wq
-      $
-      ```
-        
-      >  Reference:
-      >
-      > [FS#930 - branches fail to build (automake)](https://bugs.openwrt.org/index.php?do=details&task_id=930&opened=169&status[0]=)
-      >
-      > [[Solved\] Compile error on 15.05 release in gdate.c](https://forum.openwrt.org/t/solved-compile-error-on-15-05-release-in-gdate-c/11624)
-      >
-      > [linkit-smart-7688-feed > Issue #50](https://github.com/MediaTek-Labs/linkit-smart-7688-feed/issues/50)
+	```shell
+	$ vim tools/automake/patches/010-automake-port-to-Perl-5.22-and-later.patch
+	--- a/bin/automake.in
+	+++ b/bin/automake.in
+	@@ -3878,7 +3878,7 @@ sub substitute_ac_subst_variables_worker
+	sub substitute_ac_subst_variables
+	{
+	 my ($text) = @_;
+	-  $text =~ s/\${([^ \t=:+{}]+)}/substitute_ac_subst_variables_worker ($1)/ge;
+	+  $text =~ s/\$[{]([^ \t=:+{}]+)}/substitute_ac_subst_variables_worker ($1)/ge;
+	 return $text;
+	}
+	
+	:wq
+	$
+	```
+	
+	
+	>  Reference:
+	>
+	> [FS#930 - branches fail to build (automake)](https://bugs.openwrt.org/index.php?do=details&task_id=930&opened=169&status[0]=)
+	>
+	> [[Solved\] Compile error on 15.05 release in gdate.c](https://forum.openwrt.org/t/solved-compile-error-on-15-05-release-in-gdate-c/11624)
+	>
+	> [linkit-smart-7688-feed > Issue #50](https://github.com/MediaTek-Labs/linkit-smart-7688-feed/issues/50)
+
+
 
 3. [u-boot > gcc7.h](u-boot)
 	
 	```
 	include/linux/compiler-gcc.h:114:1: fatal error: linux/compiler-gcc7.h: No such file or directory
 	```
-	
+
 	**Solution:**
 	
 	```shell
@@ -304,7 +309,7 @@ In the Ubuntu system, open the **Terminal** application and enter the following 
 	+#endif /* CONFIG_ARCH_USE_BUILTIN_BSWAP */
 	
 	:wq
-  $
+	$
 	```
 	
 	> Reference:
@@ -316,23 +321,25 @@ In the Ubuntu system, open the **Terminal** application and enter the following 
 
 4. [rsa-sign.c](rsa)
 
-      ```
-      build_dir/host/u-boot-2014.10/lib/rsa/rsa-sign.c:279:21: error: dereferencing pointer to incomplete type ‘RSA {aka struct rsa_st}’
-        if (BN_num_bits(key->e) > 64)
-                           ^~
-      scripts/Makefile.host:134: recipe for target 'tools/lib/rsa/rsa-sign.o' failed
-      make[5]: *** [tools/lib/rsa/rsa-sign.o] Error 1
-      Makefile:1195: recipe for target 'tools-only' failed
-      make[4]: *** [tools-only] Error 2
-      ```
+	```
+	build_dir/host/u-boot-2014.10/lib/rsa/rsa-sign.c:279:21: error: dereferencing pointer to incomplete type ‘RSA {aka struct rsa_st}’
+	if (BN_num_bits(key->e) > 64)
+	                   ^~
+	scripts/Makefile.host:134: recipe for target 'tools/lib/rsa/rsa-sign.o' failed
+	make[5]: *** [tools/lib/rsa/rsa-sign.o] Error 1
+	Makefile:1195: recipe for target 'tools-only' failed
+	make[4]: *** [tools-only] Error 2
+	```
 
-      **Solution:**
+	**Solution:**
 
-      ```shell
-      $ sudo apt install libssl1.0-dev
-      ```
+	```shell
+	$ sudo apt install libssl1.0-dev
+	```
 
-      reference: [lede/openwrt does not compile with OpenSSL 1.1 #973](https://github.com/freifunk-gluon/gluon/issues/973#issuecomment-265911151)
+	reference: [lede/openwrt does not compile with OpenSSL 1.1 #973](https://github.com/freifunk-gluon/gluon/issues/973#issuecomment-265911151)
+
+
 
 5. [gcc-linaro-4.8-2014.04/gcc](gcc-linaro-4.8-2014.04)
 	
@@ -345,7 +352,9 @@ In the Ubuntu system, open the **Terminal** application and enter the following 
 	
 	手动修改 `./build_dir/toolchain-mipsel_24kec+dsp_gcc-4.8-linaro_uClibc-0.9.33.2/gcc-linaro-4.8-2014.04/gcc/cp/cfns.h` 文件 -- 根据 4. fix-gcc5-build.patch 修改。
 暂时不知道应该将 `.patch` 放在哪个路径下（所以目前只能手动修改）。
-	
+
+
+
 6. [feeds/packages/lang/node](node)
 	```
 	make[3]: Entering directory '/<path>/<to>/feeds/packages/lang/node'
