@@ -153,7 +153,8 @@ In the Ubuntu system, open the **Terminal** application and enter the following 
 
 `make V=99` issue, use patch to resolve:
 
-1. glib-gdate
+1. [glib-gdate](glib)
+	
 	```
 	gdate.c:2497:7: error: format not a string literal, format string not checked [-Werror=format-nonliteral]
 	    tmplen = strftime (tmpbuf, tmpbufsize, locale_format, &tm);
@@ -185,15 +186,15 @@ In the Ubuntu system, open the **Terminal** application and enter the following 
 	 +#pragma GCC diagnostic pop
 	 :wq
 	 $ make V=99
-	 ```
-
+ ```
+  
       > Reference:
       >
       > 1. https://github.com/hak5/wifipineapple-openwrt/blob/master/tools/pkg-config/patches/001-glib-gdate-suppress-string-format-literal-warning.patch
       > 2. https://blog.csdn.net/fan1234500/article/details/79892981
-      > 3. https://blog.csdn.net/zmlovelx/article/details/81664043
-
-2. automake-1.5
+    > 3. https://blog.csdn.net/zmlovelx/article/details/81664043
+	
+2. [automake-1.5](automake)
 
 	**Solution:**
 	
@@ -222,12 +223,14 @@ In the Ubuntu system, open the **Terminal** application and enter the following 
       >
       > [linkit-smart-7688-feed > Issue #50](https://github.com/MediaTek-Labs/linkit-smart-7688-feed/issues/50)
 
-3. u-boot > gcc7.h
+3. [u-boot > gcc7.h](u-boot)
+	
 	```
 	include/linux/compiler-gcc.h:114:1: fatal error: linux/compiler-gcc7.h: No such file or directory
 	```
 	
 	**Solution:**
+	
 	```shell
 	$ #mkdir tools/include/patches/
 	$ vim tools/mkimage/patches/0001-Add-GCC7-supportation.patch
@@ -301,9 +304,9 @@ In the Ubuntu system, open the **Terminal** application and enter the following 
 	+#endif /* CONFIG_ARCH_USE_BUILTIN_BSWAP */
 	
 	:wq
-	$
+  $
 	```
-  
+	
 	> Reference:
 	>
 	> [u-boot build fail rocko - odroidc2 #9](https://github.com/superna9999/meta-meson/issues/9)
@@ -311,7 +314,7 @@ In the Ubuntu system, open the **Terminal** application and enter the following 
 	> [Fix u-boot compile failed using GCC7 #10](https://github.com/superna9999/meta-meson/pull/10/commits/28e9c5e5e1b3f7cc4da05bdbea8ed7fd3ac5c0c4) > [0001-Add-GCC7-supportation.patch](https://github.com/nvl1109/meta-meson/blob/28e9c5e5e1b3f7cc4da05bdbea8ed7fd3ac5c0c4/recipes-bsp/u-boot/u-boot-odroidc2/0001-Add-GCC7-supportation.patch)
 
 
-4. rsa-sign.c
+4. [rsa-sign.c](rsa)
 
       ```
       build_dir/host/u-boot-2014.10/lib/rsa/rsa-sign.c:279:21: error: dereferencing pointer to incomplete type ‘RSA {aka struct rsa_st}’
@@ -331,7 +334,8 @@ In the Ubuntu system, open the **Terminal** application and enter the following 
 
       reference: [lede/openwrt does not compile with OpenSSL 1.1 #973](https://github.com/freifunk-gluon/gluon/issues/973#issuecomment-265911151)
 
-5. gcc-linaro-4.8-2014.04/gcc
+5. [gcc-linaro-4.8-2014.04/gcc](gcc-linaro-4.8-2014.04)
+	
 	> Reference:
 	> 1. ~~[Unable to build GCC due to c++11 errors](https://stackoverflow.com/questions/41204632/unable-to-build-gcc-due-to-c11-errors)~~
 	> 2. ~~[patch](https://gcc.gnu.org/git/?p=gcc.git;a=commitdiff;h=ec1cc0263f156f70693a62cf17b254a0029f4852)~~
@@ -340,9 +344,9 @@ In the Ubuntu system, open the **Terminal** application and enter the following 
 	> 5. [patch-gcc_cp_cfns.h](https://drive.google.com/file/d/0BwWNLQDwiOxtYnJSRm1Dam9XTU0/view)
 	
 	手动修改 `./build_dir/toolchain-mipsel_24kec+dsp_gcc-4.8-linaro_uClibc-0.9.33.2/gcc-linaro-4.8-2014.04/gcc/cp/cfns.h` 文件 -- 根据 4. fix-gcc5-build.patch 修改。
-	暂时不知道应该将 `.patch` 放在哪个路径下（所以目前只能手动修改）。
-
-6. feeds/packages/lang/node
+暂时不知道应该将 `.patch` 放在哪个路径下（所以目前只能手动修改）。
+	
+6. [feeds/packages/lang/node](node)
 	```
 	make[3]: Entering directory '/<path>/<to>/feeds/packages/lang/node'
 	(cd /<path>/<to>/build_dir/host/node-v0.12.7/; if [ -x configure ]; then cp -fpR /<path>/<to>/scripts/config.{guess,sub} /<path>/<to>/build_dir/host/node-v0.12.7// &&  python ./configure  --dest-os=linux --without-snapshot --prefix=/<path>/<to>/staging_dir/host/ ; fi )
